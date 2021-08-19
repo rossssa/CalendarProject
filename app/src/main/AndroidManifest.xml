@@ -18,7 +18,6 @@
             </intent-filter>
         </activity>
         <activity android:name=".day_activity"></activity>
-        <activity android:name=".setting_activity"></activity>
         <activity android:name=".information_activity"></activity>
         <activity android:name=".memo_activity"></activity>
     </application>

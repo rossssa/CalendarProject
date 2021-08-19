@@ -16,6 +16,8 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
 
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
+
 import java.time.LocalDate;
 import java.time.YearMonth;
 import java.time.format.DateTimeFormatter;
@@ -29,6 +31,8 @@ public class MainActivity extends AppCompatActivity implements CalendarAdapter.O
     private RecyclerView calendarRecyclerView;
     public static LocalDate selectedDate;
     private Toolbar myToolbar;
+    private FloatingActionButton floatingActionButton;
+    public static ArrayList<Event> arrayList = new ArrayList<>();
 
     @RequiresApi(api = Build.VERSION_CODES.O)
     @Override
@@ -44,8 +48,26 @@ public class MainActivity extends AppCompatActivity implements CalendarAdapter.O
         getSupportActionBar().setTitle("캘린더");
 
 
+        floatingActionButton = findViewById(R.id.fbn_main);
+
+        floatingActionButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent gomemo = new Intent(v.getContext(), memo_activity.class);
+                startActivity(gomemo);
+            }
+        });
+
+
+
     }
 
+    @RequiresApi(api = Build.VERSION_CODES.O)
+    @Override
+    protected void onRestart() {
+        super.onRestart();
+        setMonthView();
+    }
 
     @RequiresApi(api = Build.VERSION_CODES.O)
     private void setMonthView() {
@@ -126,16 +148,15 @@ public class MainActivity extends AppCompatActivity implements CalendarAdapter.O
         switch (item.getItemId()){
             case R.id.menu_search:
                 break;
-            case R.id.menu_settings:
-                Intent toset = new Intent(this, setting_activity.class);
-                startActivity(toset);
-                break;
             case R.id.menu_information:
                 Intent toinfo = new Intent(this, information_activity.class);
                 startActivity(toinfo);
                 break;
+            case R.id.menu_reset:
+                break;
         }
         return super.onOptionsItemSelected(item);
     }
+
 
 }

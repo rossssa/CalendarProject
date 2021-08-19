@@ -10,11 +10,11 @@
 
     <group>
         <item
-            android:id="@+id/menu_settings"
-            android:title="설정"/>
-        <item
             android:id="@+id/menu_information"
             android:title="앱정보"/>
+        <item
+            android:id="@+id/menu_reset"
+            android:title="초기화"/>
 
     </group>
 </menu>

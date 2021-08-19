@@ -2,8 +2,6 @@ package com.example.calendarproject;
 
 import android.app.DatePickerDialog;
 import android.app.TimePickerDialog;
-import android.content.Intent;
-import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.os.Build;
 import android.os.Bundle;
@@ -16,7 +14,6 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.TimePicker;
 
-import androidx.annotation.NonNull;
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
@@ -27,7 +24,7 @@ import static com.example.calendarproject.MainActivity.arrayList;
 import static com.example.calendarproject.MainActivity.selectedDate;
 
 
-public class memo_activity extends AppCompatActivity {
+public class memochange_activity extends AppCompatActivity {
 
     private Toolbar myToolbar;
     EditText id_title, id_location, id_explain;
@@ -40,13 +37,13 @@ public class memo_activity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.memo_calender);
+        setContentView(R.layout.memochange_calender);
 
-        Toolbar toolbar = findViewById(R.id.tb_id_memo);
+        Toolbar toolbar = findViewById(R.id.tb_id_change);
 
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true); // 뒤로가기 버튼, 디폴트로 true만 해도 백버튼이 생성
-        getSupportActionBar().setTitle("새 이벤트");
+        getSupportActionBar().setTitle("이벤트 수정");
         toolbar.setTitleTextColor(Color.BLACK);
 
 
@@ -70,7 +67,7 @@ public class memo_activity extends AppCompatActivity {
             @RequiresApi(api = Build.VERSION_CODES.O)
             @Override
             public void onClick(View v) {
-                DatePickerDialog datePickerDialog = new DatePickerDialog(memo_activity.this,
+                DatePickerDialog datePickerDialog = new DatePickerDialog(memochange_activity.this,
                         new DatePickerDialog.OnDateSetListener() {
                             @Override
                             public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
@@ -92,7 +89,7 @@ public class memo_activity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
-                TimePickerDialog timePickerDialog = new TimePickerDialog(memo_activity.this, new TimePickerDialog.OnTimeSetListener() {
+                TimePickerDialog timePickerDialog = new TimePickerDialog(memochange_activity.this, new TimePickerDialog.OnTimeSetListener() {
                     @Override
                     public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
                         time_tv.setText(String.format("%02d:%02d",hourOfDay, minute));
@@ -111,7 +108,7 @@ public class memo_activity extends AppCompatActivity {
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         MenuInflater menuInflater = getMenuInflater();
-        menuInflater.inflate(R.menu.menu_memo, menu);
+        menuInflater.inflate(R.menu.menu_change, menu);
         return super.onCreateOptionsMenu(menu);
     }
 
@@ -119,7 +116,7 @@ public class memo_activity extends AppCompatActivity {
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()){
-                case R.id.menu_save: {
+            case R.id.menu_change: {
                     LocalDate targetDateTime = LocalDate.of(mYear, mMonth, mDayOfMonth);
                     String title = id_title.getText().toString();
                     String location = id_location.getText().toString();
@@ -131,7 +128,9 @@ public class memo_activity extends AppCompatActivity {
                     finish();
                     break;
                 }
+            case R.id.menu_delete:{
 
+            }
                 case android.R.id.home: { //toolbar의 back키 눌렀을 때 동작
                     finish();
                     return true;
