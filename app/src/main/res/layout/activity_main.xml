@@ -156,7 +156,8 @@
         android:id="@+id/calendarRecyclerView"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_marginTop="125dp">
+        android:layout_marginTop="125dp"
+        tools:listitem="@layout/calender_cell">
 
 
     </androidx.recyclerview.widget.RecyclerView>

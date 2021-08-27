@@ -17,7 +17,7 @@ public class information_activity extends AppCompatActivity {
         Toolbar toolbar = findViewById(R.id.tb_id_information);
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true); // 뒤로가기 버튼, 디폴트로 true만 해도 백버튼이 생성
-        getSupportActionBar().setTitle("앱정보");
+        getSupportActionBar().setTitle("About");
         toolbar.setTitleTextColor(Color.BLACK);
     }
 

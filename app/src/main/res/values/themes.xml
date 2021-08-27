@@ -14,8 +14,28 @@
         <!-- Customize your theme here. -->
         <item name="windowActionBar">false</item>
         <item name="windowNoTitle">true</item>
+    </style>
+
+    <style name="DateTheme" parent="Theme.AppCompat.Light.Dialog">
+        <item name="colorAccent">#CFCCD3</item>
+        <item name="android:background">#5E6798</item>
+        <item name="android:textColorPrimaryInverse">@color/white</item>
+        <item name="android:textColorPrimary">@color/white</item>
+        <item name="android:textColorSecondary">@color/white</item>
+        <item name="android:textColorSecondaryInverse">@color/white</item>
+        <item name="android:textColorTertiary">@color/white</item>
+        <item name="android:headerBackground">@color/white</item>
+
+    </style>
+
+    <style name="TimeTheme" parent="Theme.AppCompat.Light.Dialog">
+        <item name="colorAccent">#5E6798</item>
+        <item name="android:background">#5E6798</item>
 
 
     </style>
+
+
+
 
 </resources>

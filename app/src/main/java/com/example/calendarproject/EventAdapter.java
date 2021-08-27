@@ -41,12 +41,8 @@ public class EventAdapter extends RecyclerView.Adapter<EventViewHolder> {
     }
 
     public interface OnItemListener1{
-
         void onItemClick1(int position, String event_title);
-
     }
-
-
-
-
 }
+
+

@@ -2,6 +2,7 @@ package com.example.calendarproject;
 
 import android.app.DatePickerDialog;
 import android.app.TimePickerDialog;
+import android.content.Intent;
 import android.graphics.Color;
 import android.os.Build;
 import android.os.Bundle;
@@ -31,25 +32,23 @@ public class memochange_activity extends AppCompatActivity {
     private TextView date_tv, time_tv;
     private DatePickerDialog datePickerDialog;
     private TimePickerDialog timePickerDialog;
-    private int mYear, mMonth, mDayOfMonth, hour, min;
+    private int mYear, mMonth, mDayOfMonth, hour, min, position;
 
     @RequiresApi(api = Build.VERSION_CODES.O)
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.memochange_calender);
-
+        Intent intent = getIntent();
+        position = intent.getIntExtra("position",1);
         Toolbar toolbar = findViewById(R.id.tb_id_change);
-
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true); // 뒤로가기 버튼, 디폴트로 true만 해도 백버튼이 생성
         getSupportActionBar().setTitle("이벤트 수정");
         toolbar.setTitleTextColor(Color.BLACK);
 
-
         date_tv = findViewById(R.id.date_tv);
         time_tv = findViewById(R.id.time_tv);
-
 
         mYear = selectedDate.getYear();
         mMonth = selectedDate.getMonthValue();
@@ -62,34 +61,40 @@ public class memochange_activity extends AppCompatActivity {
         id_explain = (EditText)findViewById(R.id.id_explain);
 
 
-        date_tv.setText(mYear+"/"+mMonth+"/"+mDayOfMonth);
+        String dateText = arrayList.get(position).getTargetDateTime().getYear()+"/"+arrayList.get(position)
+                .getTargetDateTime().getMonthValue()+"/"+arrayList.get(position).getTargetDateTime().getDayOfMonth();
+
+        date_tv.setText(dateText);
         date_tv.setOnClickListener(new View.OnClickListener() {
             @RequiresApi(api = Build.VERSION_CODES.O)
             @Override
             public void onClick(View v) {
-                DatePickerDialog datePickerDialog = new DatePickerDialog(memochange_activity.this,
+                DatePickerDialog datePickerDialog = new DatePickerDialog(memochange_activity.this,R.style.DateTheme,
                         new DatePickerDialog.OnDateSetListener() {
                             @Override
                             public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
-                                date_tv.setText(year+"/"+month+"/"+dayOfMonth);
+                                date_tv.setText(year+"/"+(month+1)+"/"+dayOfMonth);
                                 mYear = year;
-                                mMonth = month;
+                                mMonth = month+1;
                                 mDayOfMonth = dayOfMonth;
                             }
                         },
                         mYear,
-                        mMonth,
+                        mMonth-1,
                         mDayOfMonth);
                 datePickerDialog.show();
             }
         });
 
-        time_tv.setText(String.format("%02d:%02d",hour, min));
+        String time = arrayList.get(position).getHour()+":"+arrayList.get(position).getMin();
+
+        time_tv.setText(time);
         time_tv.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
-                TimePickerDialog timePickerDialog = new TimePickerDialog(memochange_activity.this, new TimePickerDialog.OnTimeSetListener() {
+                TimePickerDialog timePickerDialog = new TimePickerDialog(memochange_activity.this, R.style.TimeTheme,
+                        new TimePickerDialog.OnTimeSetListener() {
                     @Override
                     public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
                         time_tv.setText(String.format("%02d:%02d",hourOfDay, minute));
@@ -100,6 +105,10 @@ public class memochange_activity extends AppCompatActivity {
                 timePickerDialog.show();
             }
         });
+
+        id_title.setText(arrayList.get(position).getTitle());
+        id_location.setText(arrayList.get(position).getLocation());
+        id_explain.setText(arrayList.get(position).getExplain());
 
     }
 
@@ -124,12 +133,14 @@ public class memochange_activity extends AppCompatActivity {
                     String mhour = Integer.toString(hour);
                     String mMin = Integer.toString(min);
                     Event event = new Event(title, location, explain, targetDateTime, mhour, mMin);
-                    arrayList.add(event);
+                    arrayList.set(position, event);
                     finish();
                     break;
                 }
             case R.id.menu_delete:{
-
+                arrayList.remove(position);
+                finish();
+                break;
             }
                 case android.R.id.home: { //toolbar의 back키 눌렀을 때 동작
                     finish();

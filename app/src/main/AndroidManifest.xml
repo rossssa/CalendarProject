@@ -20,6 +20,7 @@
         <activity android:name=".day_activity"></activity>
         <activity android:name=".information_activity"></activity>
         <activity android:name=".memo_activity"></activity>
+        <activity android:name=".memochange_activity"></activity>
     </application>
 
 </manifest>

@@ -1,22 +1,53 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="57dp"
+    android:layout_height="wrap_content"
+    android:gravity="center_horizontal"
+    android:orientation="vertical">
 
     <TextView
+        android:id="@+id/cellDayText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/cellDayText"
-        android:text="1"
-        android:textSize="20sp"
-        android:textColor="@color/black"
         android:fontFamily="@font/elandchoicem"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintVertical_bias="0.25"/>
+        android:text="1"
+        android:textColor="@color/black"
+        android:textSize="20sp" />
+
+    <TextView
+        android:id="@+id/event_tv1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="2dp"
+        android:background="#66A8ADC5"
+        android:text="TextView"
+        android:textSize="12sp"
+        android:visibility="visible"
+        android:layout_marginTop="2dp" />
+
+    <TextView
+        android:id="@+id/event_tv2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="2dp"
+        android:background="#66A8ADC5"
+        android:text="TextView"
+        android:textSize="12sp"
+        android:visibility="visible"
+        android:layout_marginTop="2dp"/>
+
+    <TextView
+        android:id="@+id/event_tv3"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="2dp"
+        android:background="#66A8ADC5"
+        android:text="TextView"
+        android:textSize="12sp"
+        android:visibility="visible"
+        android:layout_marginTop="2dp"/>
 
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+</LinearLayout>

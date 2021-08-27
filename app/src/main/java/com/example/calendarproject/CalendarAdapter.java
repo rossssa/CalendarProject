@@ -11,15 +11,14 @@ import java.util.ArrayList;
 
 public class CalendarAdapter extends RecyclerView.Adapter<CalendarViewHolder> {
 
-    private final ArrayList<String> daysOfMonth;
+    private final ArrayList<CalendarEvent> daysOfMonth;
     private final OnItemListener onItemListener;
 
-    public CalendarAdapter(ArrayList<String> daysOfMonth, OnItemListener onItemListener) {
+    public CalendarAdapter(ArrayList<CalendarEvent> daysOfMonth, OnItemListener onItemListener) {
         this.daysOfMonth = daysOfMonth;
         this.onItemListener = onItemListener;
     }
 
-    @NonNull
     @Override
     public CalendarViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
 
@@ -30,11 +29,31 @@ public class CalendarAdapter extends RecyclerView.Adapter<CalendarViewHolder> {
         return new CalendarViewHolder(view, onItemListener);
 
     }
-
     @Override
     public void onBindViewHolder(@NonNull CalendarViewHolder holder, int position) {
 
-        holder.dayOfMonth.setText(daysOfMonth.get(position));
+        holder.dayOfMonth.setText(daysOfMonth.get(position).getDay());
+        String title1 = daysOfMonth.get(position).getTitleArray().get(0);
+        String title2 = daysOfMonth.get(position).getTitleArray().get(1);
+        String title3 = daysOfMonth.get(position).getTitleArray().get(2);
+        if (!title1.equals("")){
+            holder.event_tv1.setVisibility(View.VISIBLE);
+            holder.event_tv1.setText(title1);
+        }else{
+            holder.event_tv1.setVisibility(View.INVISIBLE);
+        }
+        if (!title2.equals("")){
+            holder.event_tv2.setVisibility(View.VISIBLE);
+            holder.event_tv2.setText(title2);
+        }else{
+            holder.event_tv2.setVisibility(View.INVISIBLE);
+        }
+        if (!title3.equals("")){
+            holder.event_tv3.setVisibility(View.VISIBLE);
+            holder.event_tv3.setText(title3);
+        }else{
+            holder.event_tv3.setVisibility(View.INVISIBLE);
+        }
 
     }
 

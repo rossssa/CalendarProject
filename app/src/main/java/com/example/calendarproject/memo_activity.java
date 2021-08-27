@@ -2,8 +2,6 @@ package com.example.calendarproject;
 
 import android.app.DatePickerDialog;
 import android.app.TimePickerDialog;
-import android.content.Intent;
-import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.os.Build;
 import android.os.Bundle;
@@ -16,7 +14,6 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.TimePicker;
 
-import androidx.annotation.NonNull;
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
@@ -49,10 +46,8 @@ public class memo_activity extends AppCompatActivity {
         getSupportActionBar().setTitle("새 이벤트");
         toolbar.setTitleTextColor(Color.BLACK);
 
-
         date_tv = findViewById(R.id.date_tv);
         time_tv = findViewById(R.id.time_tv);
-
 
         mYear = selectedDate.getYear();
         mMonth = selectedDate.getMonthValue();
@@ -64,24 +59,24 @@ public class memo_activity extends AppCompatActivity {
         id_location = (EditText)findViewById(R.id.id_location);
         id_explain = (EditText)findViewById(R.id.id_explain);
 
-
         date_tv.setText(mYear+"/"+mMonth+"/"+mDayOfMonth);
         date_tv.setOnClickListener(new View.OnClickListener() {
             @RequiresApi(api = Build.VERSION_CODES.O)
             @Override
             public void onClick(View v) {
-                DatePickerDialog datePickerDialog = new DatePickerDialog(memo_activity.this,
+                DatePickerDialog datePickerDialog = new DatePickerDialog(memo_activity.this, R.style.DateTheme,
                         new DatePickerDialog.OnDateSetListener() {
+
                             @Override
                             public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
-                                date_tv.setText(year+"/"+month+"/"+dayOfMonth);
+                                date_tv.setText(year+"/"+(month+1)+"/"+dayOfMonth);
                                 mYear = year;
-                                mMonth = month;
+                                mMonth = month+1;
                                 mDayOfMonth = dayOfMonth;
                             }
                         },
                         mYear,
-                        mMonth,
+                        mMonth-1,
                         mDayOfMonth);
                 datePickerDialog.show();
             }
@@ -92,7 +87,8 @@ public class memo_activity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
-                TimePickerDialog timePickerDialog = new TimePickerDialog(memo_activity.this, new TimePickerDialog.OnTimeSetListener() {
+                TimePickerDialog timePickerDialog = new TimePickerDialog(memo_activity.this, R.style.TimeTheme,
+                        new TimePickerDialog.OnTimeSetListener() {
                     @Override
                     public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
                         time_tv.setText(String.format("%02d:%02d",hourOfDay, minute));
@@ -105,7 +101,6 @@ public class memo_activity extends AppCompatActivity {
         });
 
     }
-
 
 
     @Override

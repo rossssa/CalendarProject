@@ -11,6 +11,7 @@ import android.widget.TextView;
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
+import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -40,6 +41,9 @@ public class day_activity extends AppCompatActivity implements EventAdapter.OnIt
         setContentView(R.layout.day_calender);
         DayMonthYearTV = findViewById(R.id.DayMonthYearTV);
         eventRecyclerView = findViewById(R.id.eventRecyclerView);
+        DividerItemDecoration dividerItemDecoration = new DividerItemDecoration(eventRecyclerView.
+                getContext(), new LinearLayoutManager(this).getOrientation());
+        eventRecyclerView.addItemDecoration(dividerItemDecoration);
 
         Toolbar toolbar = findViewById(R.id.tb_id_day);
         setSupportActionBar(toolbar);
@@ -57,11 +61,9 @@ public class day_activity extends AppCompatActivity implements EventAdapter.OnIt
             }
         });
 
-
         Intent intent = getIntent();
         dayText = intent.getStringExtra("dayText");
 
-        eventRecyclerView.addItemDecoration(new RecyclerViewDecoration(30));
         setDayView();
     }
 
@@ -148,7 +150,9 @@ public class day_activity extends AppCompatActivity implements EventAdapter.OnIt
 
     @Override
     public void onItemClick1(int position, String event_title) {
-        return;
+        Intent intent = new Intent(this, memochange_activity.class);
+        intent.putExtra("position",position);
+        startActivity(intent);
     }
 }
 
